@@ -1,5 +1,7 @@
 package com.example.spring.api;
 
+import com.example.spring.User;
+import com.example.spring.annotation.InjectUserInfo;
 import com.example.spring.core.TestInt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,5 +18,10 @@ public class TestController {
     public String test() {
         return testInt.test();
         //return "agjfasgfja";
+    }
+
+    @RequestMapping(value = "inject", method = RequestMethod.GET)
+    public User testInject(@InjectUserInfo(name = "XTB") User user) {
+        return user;
     }
 }

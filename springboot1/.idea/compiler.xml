@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api" />
+        <module name="catalogue" />
         <module name="core-impl" />
         <module name="core-int" />
         <module name="dashboard" />
         <module name="main" />
+        <module name="security" />
       </profile>
     </annotationProcessing>
   </component>

@@ -14,6 +14,8 @@
         <module>dashboard</module>
         <module>core/core-int</module>
         <module>core/core-impl</module>
+      <module>security</module>
+      <module>catalogue</module>
     </modules>
 
     <parent>
