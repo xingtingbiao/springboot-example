@@ -14,8 +14,8 @@
         <module>dashboard</module>
         <module>core/core-int</module>
         <module>core/core-impl</module>
-      <module>security</module>
-      <module>catalogue</module>
+        <module>security</module>
+        <module>catalogue</module>
     </modules>
 
     <parent>
@@ -61,7 +61,7 @@
                         </goals>
                         <!--可以生成不含依赖包的不可执行Jar包-->
                         <configuration>
-                          <classifier>exec</classifier>
+                            <classifier>exec</classifier>
                         </configuration>
                     </execution>
                 </executions>
@@ -69,5 +69,30 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>sit</id>
+            <properties>
+                <spring.profiles.active>sit</spring.profiles.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>pre</id>
+            <properties>
+                <spring.profiles.active>pre</spring.profiles.active>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
