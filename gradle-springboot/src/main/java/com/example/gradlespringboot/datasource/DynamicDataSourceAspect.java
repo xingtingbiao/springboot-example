@@ -16,23 +16,11 @@ public class DynamicDataSourceAspect {
     @Before("execution(* com.example.gradlespringboot.mapper..*.*(..))")
     public void before(JoinPoint point) {
         String dataSource = DataSourceContextHolder.DEFAULT_DS;
-        //获得当前访问的class
-        Class<?> className = point.getTarget().getClass();
-        //获得访问的方法名
-        String methodName = point.getSignature().getName();
-        //得到方法的参数的类型
-        Class[] argClass = ((MethodSignature)point.getSignature()).getParameterTypes();
-        try {
-            DSAnnotation annotationOfClass = (DSAnnotation)point.getSignature().getDeclaringType().getAnnotation(DSAnnotation.class);
-            // 得到访问的方法对象
-            Method method = className.getMethod(methodName, argClass);
-            // 判断是否存在@DS注解
-            DSAnnotation annotation = method.getAnnotation(DSAnnotation.class);
-            annotation = annotation == null ? annotationOfClass : annotation;
-            dataSource = annotation.value();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
+        DSAnnotation annotationOfClass = (DSAnnotation)point.getSignature().getDeclaringType().getAnnotation(DSAnnotation.class);
+        Method method = ((MethodSignature) point.getSignature()).getMethod();
+        DSAnnotation annotation = method.getAnnotation(DSAnnotation.class);
+        annotation = annotation == null ? annotationOfClass : annotation;
+        if (null != annotation) dataSource = annotation.value();
         DataSourceContextHolder.setDB(dataSource);
     }
 
